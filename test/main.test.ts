@@ -282,10 +282,12 @@ describe('nft raffle main test', () => {
             expect(lastTransaction.exit_code).to.equal(TVM_EXIT_CODES.OK)
             const get = await MSG.getRaffleState(smc)
             expect(get.State).to.equal(STATES.Completed)
-            lastTransaction.actionList.forEach((e) => {
+            const modes: number[] = [ 1, 1, 1, 1, 1, 1, 0, 130 ]
+            const types: string[] = [ 'send_msg', 'send_msg', 'send_msg', 'send_msg', 'send_msg', 'send_msg', 'reserve_currency', 'send_msg' ]
+            lastTransaction.actionList.forEach((e, i: number) => {
                 const msgo = <any>e
-                expect(msgo.mode).to.equals(1)
-                expect(msgo.type).to.equals('send_msg')
+                expect(msgo.mode).to.equals(modes[i])
+                expect(msgo.type).to.equals(types[i])
             })
         })
         it('13) cancel after raffle', async () => {
@@ -293,10 +295,12 @@ describe('nft raffle main test', () => {
             expect(lastTransaction.exit_code).to.equal(TVM_EXIT_CODES.OK)
             const get = await MSG.getRaffleState(smc)
             expect(get.State).to.equal(STATES.Completed)
-            lastTransaction.actionList.forEach((e) => {
+            const modes: number[] = [ 1, 1, 1, 1, 1, 1, 0, 130 ]
+            const types: string[] = [ 'send_msg', 'send_msg', 'send_msg', 'send_msg', 'send_msg', 'send_msg', 'reserve_currency', 'send_msg' ]
+            lastTransaction.actionList.forEach((e, i: number) => {
                 const msgo = <any>e
-                expect(msgo.mode).to.equals(1)
-                expect(msgo.type).to.equals('send_msg')
+                expect(msgo.mode).to.equals(modes[i])
+                expect(msgo.type).to.equals(types[i])
             })
             const result = await smc.sendInternalMessage(new InternalMessage({
                 to: SELF_ADDR,

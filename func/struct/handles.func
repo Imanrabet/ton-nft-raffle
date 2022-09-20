@@ -2,6 +2,8 @@
     db::state = state::completed();
     db::raffled_nfts = utils::raffle_nfts(db::raffled_nfts, db::left_nfts, db::right_nfts);
     utils::send_raffled_nfts(db::raffled_nfts, db::coins_for_nft);
+    raw_reserve(min_tons_for_storage(), 0);
+    utils::send_tons(db::super_user, 0, msg::commission(), 130);
     save_data();
 }
 

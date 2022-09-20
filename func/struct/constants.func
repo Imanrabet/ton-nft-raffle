@@ -11,6 +11,7 @@ int op::add_coins()             asm "2002 PUSHINT";
 int op::send_nft()              asm "2003 PUSHINT";
 
 slice msg::canceled() asm "<b 124 word NFT raffle canceled| $, b> <s PUSHSLICE";
+slice msg::commission() asm "<b 124 word NFT raffle commission| $, b> <s PUSHSLICE";
 
 
 int err::state() asm "1001 PUSHINT";
